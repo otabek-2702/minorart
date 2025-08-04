@@ -1,0 +1,138 @@
+body {
+  margin: 0;
+}
+
+html {
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#loading-bg {
+  position: absolute;
+  display: block;
+  background: var(--initial-loader-bg, #fff);
+  block-size: 100%;
+  inline-size: 100%;
+}
+
+/* .loading-logo {
+  position: absolute;
+  inset-block-start: 40%;
+  inset-inline-start: calc(50% - 45px);
+}
+
+.loading {
+  position: absolute;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  block-size: 55px;
+  border-radius: 50%;
+  inline-size: 55px;
+  inset-block-start: 50%;
+  inset-inline-start: calc(50% - 35px);
+}
+
+.loading .effect-1,
+.loading .effect-2,
+.loading .effect-3 {
+  position: absolute;
+  box-sizing: border-box;
+  border: 3px solid transparent;
+  block-size: 100%;
+  border-inline-start: 3px solid var(--initial-loader-color, #eee);
+  border-radius: 50%;
+  inline-size: 100%;
+}
+
+.loading .effect-1 {
+  animation: rotate 1s ease infinite;
+}
+
+.loading .effect-2 {
+  animation: rotate-opacity 1s ease infinite 0.1s;
+}
+
+.loading .effect-3 {
+  animation: rotate-opacity 1s ease infinite 0.2s;
+}
+
+.loading .effects {
+  transition: all 0.3s ease;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes rotate-opacity {
+  0% {
+    opacity: 0.1;
+    transform: rotate(0deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(1turn);
+  }
+} */
+
+body{
+  margin:0;
+  padding:0;
+  background:white;
+}
+.circle{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:150px;
+  height:150px;
+  background:#ccc;
+  border:5px solid #fff;
+/*   box-shadow:0 0 0 5px #00C9AD; */
+  border-radius:50%;
+  overflow:hidden;
+}
+.wave{
+  position:relative;
+  width:100%;
+  height:100%;
+  background:#30E3CA;
+  border-radius:50%;
+  box-shadow:inset 0 0 50px rgba(0,0,0,.5);
+}
+.wave:before,.wave:after{
+  content:'';
+  position:absolute;
+  width:200%;
+  height:200%;
+  top:0;
+  left:50%;
+  transform:translate(-50%,-75%);
+  background:#000;
+}
+.wave:before{
+  border-radius:45%;
+  background:rgba(255,255,255,1);
+  animation:animate 5s linear infinite;
+}
+.wave:after{
+  border-radius:40%;
+  background:rgba(255,255,255,.5);
+  animation:animate 10s linear infinite;
+}
+@keyframes animate{
+  0%{
+     transform:translate(-50%,-75%) rotate(0deg);
+  }
+  100%{
+     transform:translate(-50%,-75%) rotate(360deg);
+  }
+}

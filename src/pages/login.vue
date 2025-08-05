@@ -25,48 +25,58 @@ const isLoading = ref(false);
 const username = ref();
 const password = ref();
 
+const BASE_URL = import.meta.env.VITE_BASE_URL
+
+
 const login = async () => {
-  // try {
-  //   isLoading.value = true;
-  //   const response = await axios.post<{
-  //     user: IApiUser;
-  //     access_token: string;
-  //     token_type: string;
-  //     expires_at: string;
-  //   }>("/auth/login", {
-  //     username: username.value,
-  //     password: password.value,
-  //   });
+  try {
+    isLoading.value = true;
 
-  //   const { access_token, user, expires_at } = response.data;
 
-  //   // Abilities
-  //   let userAbilities = user.permissions_all?.map((item) => {
-  //     const [action, subject] = item.split("-");
-  //     return {
-  //       action: action as Actions,
-  //       subject: subject as Subjects,
-  //     };
-  //   });
-  //   localStorage.setItem("userAbilities", JSON.stringify(userAbilities));
-  //   ability.update(userAbilities);
+    const response = await fetch(`${BASE_URL}/api/login/`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username.value,
+        password: password.value,
+      }),
+    });
 
-  //   const datas = {
-  //     name: user.name,
-  //     roles: user.roles,
-  //     branches: user.branches,
-  //   };
-  //   localStorage.setItem("userData", JSON.stringify(datas));
-  //   localStorage.setItem("accessToken", access_token);
-  //   localStorage.setItem("expires_at", expires_at);
+    const {token}: {
+      token: string;
+      token_type: number;
+    } = await response.json();
 
-  //   // Redirect to `to` query if exist or redirect to index route
-  //   router.replace(route.query.to ? String(route.query.to) : "/");
-  // } catch (error) {
-  //   console.error(error);
-  // } finally {
-  //   isLoading.value = false;
-  // }
+    // // Abilities
+    // let userAbilities = user.permissions_all?.map((item) => {
+    //   const [action, subject] = item.split("-");
+    //   return {
+    //     action: action as Actions,
+    //     subject: subject as Subjects,
+    //   };
+    // });
+    // localStorage.setItem("userAbilities", JSON.stringify(userAbilities));
+    // ability.update(userAbilities);
+
+    // const datas = {
+    //   name: user.name,
+    //   roles: user.roles,
+    //   branches: user.branches,
+    // };
+    // localStorage.setItem("userData", JSON.stringify(datas));
+    // localStorage.setItem("expires_at", expires_at);
+
+    localStorage.setItem("accessToken", token);
+
+    // Redirect to `to` query if exist or redirect to index route
+    router.replace(route.query.to ? String(route.query.to) : "/");
+  } catch (error) {
+    console.error(error);
+  } finally {
+    isLoading.value = false;
+  }
 };
 
 const onSubmit = async () => {
@@ -140,6 +150,7 @@ const onSubmit = async () => {
 </style>
 
 <route lang="yaml">
+name: Login
 meta:
   layout: blank
   action: read

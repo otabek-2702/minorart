@@ -1,3 +1,5 @@
+.env
+
 # Logs
 logs
 *.log
@@ -32,3 +34,6 @@ dist-ssr
 
 # iconify dist files
 src/@iconify/*.js
+
+*.lock
+bun.lockb

@@ -27,6 +27,7 @@
         "vue-router": "4.1.6",
         "vue3-apexcharts": "1.4.1",
         "vue3-perfect-scrollbar": "1.6.1",
+        "vue3-toastify": "^0.2.8",
         "vuetify": "3.2.0",
         "webfontloader": "1.6.28",
       },
@@ -1466,6 +1467,8 @@
     "vue3-apexcharts": ["vue3-apexcharts@1.4.1", "", { "peerDependencies": { "apexcharts": "> 3.0.0", "vue": "> 3.0.0" } }, "sha512-96qP8JDqB9vwU7bkG5nVU+E0UGQn7yYQVqUUCLQMYWDuQyu2vE77H/UFZ1yI+hwzlSTBKT9BqnNG8JsFegB3eg=="],
 
     "vue3-perfect-scrollbar": ["vue3-perfect-scrollbar@1.6.1", "", { "dependencies": { "cssnano": "^5.1.14", "perfect-scrollbar": "^1.5.5", "postcss-import": "^12.0.0" } }, "sha512-r9wfxlFwVyHXMPKG0PnR7fDfJPQ20KEVzKQfSU5by2WKYz2PwV0bTfyfejmEyZXsXL0O8VtSWtgxfPuFR2AGOg=="],
+
+    "vue3-toastify": ["vue3-toastify@0.2.8", "", { "peerDependencies": { "vue": ">=3.2.0" }, "optionalPeers": ["vue"] }, "sha512-8jDOqsJaBZEbGpCbhWDETJc11D1lZefvgFPq/IPdM+U7+qyXoVPDvK6uq/FIgyV7qV0NcNzvGBMEzjsLQqGROw=="],
 
     "vuetify": ["vuetify@3.2.0", "", { "peerDependencies": { "vite-plugin-vuetify": "^1.0.0-alpha.12", "vue": "^3.2.0", "vue-i18n": "^9.0.0", "webpack-plugin-vuetify": "^2.0.0-alpha.11" }, "optionalPeers": ["vite-plugin-vuetify", "vue-i18n", "webpack-plugin-vuetify"] }, "sha512-f1T+EgfHdI425d+Yprm0PONrU/GdRSvghiufUbE2b3atpDzE0lH5oEJTL6/Lzf3oR8V2j+XHvYQ8DZ1Ob6Jp6A=="],
 

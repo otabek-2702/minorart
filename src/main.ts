@@ -5,10 +5,12 @@ import layoutsPlugin from '@/plugins/layouts'
 import vuetify from '@/plugins/vuetify'
 import { loadFonts } from '@/plugins/webfontloader'
 import router from '@/router'
-import '@core/scss/template/index.scss'
-import '@styles/styles.scss'
 import { createPinia } from 'pinia'
 import { createApp } from 'vue'
+import Vue3Toastify, { ToastContainerOptions } from 'vue3-toastify'
+import "vue3-toastify/dist/index.css";
+import '@core/scss/template/index.scss'
+import '@styles/styles.scss'
 
 loadFonts()
 
@@ -21,5 +23,11 @@ app.use(createPinia())
 app.use(router)
 app.use(layoutsPlugin)
 
+// Toastify
+app.use(Vue3Toastify, {
+    autoClose: 1200,
+    theme: "auto",
+
+} as ToastContainerOptions);
 // Mount vue app
 app.mount('#app')

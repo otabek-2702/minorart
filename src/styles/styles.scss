@@ -1,1 +1,20 @@
 // Write your overrides
+table tr th[data-column="id"] {
+  width: 48px;
+}
+
+table tr th[data-column="actions"] {
+  width: 130px;
+}
+
+table tr td[data-column="actions"]:has(:nth-last-child(3)) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+
+table tr td[data-column="actions"] > * {
+  z-index: 10;
+}

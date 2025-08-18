@@ -2,7 +2,7 @@ export interface IApiOrder {
   id: number;
   agent: IApiAgent;
   deadline: string;
-  status: number;
+  status: 1|2|3|4|5;
   get_status_display: "Yangi" | "Tayyorlanmoqda" | "Pauza" | "Yuborilgan";
   items: IApiOrderItem[];
   created_date: string;
@@ -22,10 +22,10 @@ export interface IApiAgent {
 export interface IApiOrderItem {
   id: number;
   product: IApiProduct;
-  count: string;
+  count: number;
   box_count: string;
-  status: number;
-  get_status_display: string;
+  status: 0|1|2;
+  get_status_display: "Tayyorlanmoqda" | "Tayyor";
 }
 
 export interface IApiProduct {

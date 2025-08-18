@@ -2,7 +2,9 @@
 import axiosIns from "@/plugins/axios";
 import TableFooter from "@/views/table-footer/TableFooter.vue";
 import TableFooterPagination from "@/views/table-footer-pagination/TableFooterPagination.vue";
-import type { IApiOrder } from "@/types"
+import type { IApiOrder } from "@/types";
+import { BASE_URL } from "@/constants";
+import { transformImageUrl } from "@/helpers";
 
 interface IComponentState {
   isFetching: boolean;
@@ -24,8 +26,6 @@ const state = ref<IComponentState>({
 
 const router = useRouter();
 const search_query = ref("");
-const BASE_URL = import.meta.env.VITE_BASE_URL
-
 
 const fetchData = async (force = false) => {
   if (
@@ -72,20 +72,19 @@ const handleSearch = () => {
 const onRowClick = (id: number) => {
   console.log(id);
 
-  router.push(`/groups/${id}/`);
+  router.push(`/orders/${id}/`);
 };
 
-const resolveInvoiceStatus = (status: IApiOrder['get_status_display']) => {
+const resolveInvoiceStatus = (status: IApiOrder["get_status_display"]) => {
   const roleMap = {
-    Yangi: { color: "info" },           // New → informational
-    Pauza: { color: "warning" },        // Paused → warning
-    Yuborilgan: { color: "success" },   // Sent → success
-    Tayyorlanmoqda: { color: "secondary" }, // Preparing → in-progress
+    Yangi: "warning",
+    Pauza: "secondary",
+    Yuborilgan: "success",
+    Tayyorlanmoqda: "ingo",
   };
 
-  return roleMap[status] || { color: "default" };
+  return roleMap[status] || "default";
 };
-
 </script>
 
 <template>
@@ -97,8 +96,14 @@ const resolveInvoiceStatus = (status: IApiOrder['get_status_display']) => {
 
           <!-- 👉 Search  -->
           <VCol cols="12" sm="3">
-            <VTextField v-model="search_query" @keyup.enter="handleSearch" @blur="handleSearch" placeholder="Qidiruv"
-              :rules="[]" density="compact" />
+            <VTextField
+              v-model="search_query"
+              @keyup.enter="handleSearch"
+              @blur="handleSearch"
+              placeholder="Qidiruv"
+              :rules="[]"
+              density="compact"
+            />
           </VCol>
         </VRow>
       </VCardItem>
@@ -118,30 +123,52 @@ const resolveInvoiceStatus = (status: IApiOrder['get_status_display']) => {
 
         <!-- 👉 Table Body -->
         <tbody>
-          <tr v-for="(item, i) in state.items" :key="item.id" @click.stop="onRowClick(item.id)" class="cursor-pointer">
+          <tr
+            v-for="(item, i) in state.items"
+            :key="item.id"
+            @click.stop="onRowClick(item.id)"
+            class="cursor-pointer"
+          >
             <td>{{ i + 1 }}</td>
             <td>
-             <div class="d-flex align-center py-1 ">
-               <img class="agent-img me-2" :src="`${BASE_URL}${item.agent.image}`" alt="">
-              <span>{{ item.agent.name }}</span>
-             </div>
+              <div class="d-flex align-center py-1">
+                <img
+                  class="agent-img me-2"
+                  :src="transformImageUrl(item.agent.image)"
+                  alt=""
+                />
+                <span>{{ item.agent.name }}</span>
+              </div>
             </td>
             <td>{{ item.deadline }}</td>
             <td>
-              <VChip :color="resolveInvoiceStatus(item.get_status_display).color" density="compact" label
-                class="text-uppercase">
+              <VChip
+                :color="resolveInvoiceStatus(item.get_status_display)"
+                density="compact"
+                label
+                class="text-uppercase"
+              >
                 {{ item.get_status_display }}
               </VChip>
             </td>
           </tr>
         </tbody>
 
-        <TableFooter :datas-length="state.items.length" :is-fetching="state.isFetching" />
+        <TableFooter
+          :datas-length="state.items.length"
+          :is-fetching="state.isFetching"
+        />
       </VTable>
 
       <!-- Pagination -->
-      <TableFooterPagination :total-pages="state.totalPages" :items-length="state.items.length"
-        :total-items="state.totalItems" v-model:currentPage="state.currentPage" />
+      <TableFooterPagination
+        :total-pages="state.totalPages"
+        :items-length="state.items.length"
+        :total-items="state.totalItems"
+        v-model:currentPage="state.currentPage"
+        pagination-data=""
+        :is-visible="true"
+      />
     </VCard>
   </div>
 </template>

@@ -23,7 +23,7 @@
     },
     // Vue
     "[vue]": {
-        "editor.defaultFormatter": "Vue.volar",
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
     },
     // Extension: Volar
     "volar.preview.port": 3000,
